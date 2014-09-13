@@ -1,0 +1,6 @@
+﻿[
+	{Provider:'Google', Public:'Key', Private:'Key'},
+	{Provider:'Facebook', Public:'Key', Private:'Key'},
+	{Provider:'Twitter', Public:'Key', Private:'Key'},
+	{Provider:'Microsoft', Public:'Key', Private:'Key'}
+]
