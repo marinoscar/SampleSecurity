@@ -74,7 +74,7 @@ namespace WebUi.Controllers
 
         public ActionResult Logout()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie, DefaultAuthenticationTypes.ExternalCookie);
             return RedirectToAction("Login");
         }
 
@@ -137,6 +137,14 @@ namespace WebUi.Controllers
 
             return RedirectToAction("Login");
         } 
+
+        [HttpGet]
+        public ActionResult Manage()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = StoreProvider.FindUserById(userId, User.Identity.AuthenticationType == DefaultAuthenticationTypes.ExternalCookie);
+            return View(user);
+        }
 
         #endregion
 
