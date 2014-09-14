@@ -97,8 +97,7 @@ namespace WebUi.Controllers
             {
                 return RedirectToAction("Login");
             }
-
-            AuthenticationManager.SignIn(loginInfo.ExternalIdentity);
+            StoreProvider.SignInExternal(loginInfo, OwinContext);
             return RedirectToLocal(returnUrl);
         }
 

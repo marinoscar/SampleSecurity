@@ -1,6 +1,6 @@
 ﻿[
-	{Provider:'Google', Public:'Key', Private:'Key'},
-	{Provider:'Facebook', Public:'Key', Private:'Key'},
+	{Provider:'Google', Public:'881211677047-3tbjipi0n13cvpbbq5o9osalost113sf.apps.googleusercontent.com', Private:'OlHi2Im1gWvub9Y4je6IbZDk'},
+	{Provider:'Facebook', Public:'334598990039022', Private:'0020f24c3143fc9aec8ba281fc15138e'},
 	{Provider:'Twitter', Public:'Key', Private:'Key'},
 	{Provider:'Microsoft', Public:'Key', Private:'Key'}
 ]
