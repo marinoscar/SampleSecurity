@@ -1,48 +1,57 @@
-﻿@{
+﻿@model Luval.Security.Model.Views.RegisterViewModel
+@{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Main.cshtml";
 }
 
+@section mainScripts{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            formValidators.userRegister();
+        });
+    </script>
+}
+
 <div class="row">
     <div class="col-md-offset-1">
-        <form class="form-horizontal" role="form" method="POST" action="@Url.Action("Register")">
-                @Html.AntiForgeryToken()
-                <legend>New User</legend>
-                <div class="form-group">
-                    <label for="UserName" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="UserName" name="UserName" placeholder="Email">
-                    </div>
+        <form id="registerForm" class="form-horizontal" role="form" method="POST" action="@Url.Action("Register")">
+            @Html.AntiForgeryToken()
+            <legend>New User</legend>
+            <div class="form-group">
+                <label for="UserName" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="UserName" name="UserName" placeholder="Email">
                 </div>
-                <div class="form-group">
-                    <label for="Password" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
-                    </div>
+            </div>
+            <div class="form-group">
+                <label for="UserPassword" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="UserPassword" name="UserPassword" placeholder="Password">
                 </div>
-                <div class="form-group">
-                    <label for="ConfirmPassword" class="col-sm-2 control-label">Confirm Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" placeholder="Confirm Password">
-                    </div>
+            </div>
+            <div class="form-group">
+                <label for="ConfirmUserPassword" class="col-sm-2 control-label">Confirm Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="ConfirmUserPassword" name="ConfirmUserPassword" placeholder="Confirm Password">
                 </div>
-                <div class="form-group">
-                    <label for="Name" class="col-sm-2 control-label">Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="Name" name="Name" placeholder="Name">
-                    </div>
+            </div>
+            <div class="form-group">
+                <label for="Name" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Name">
                 </div>
-                <div class="form-group">
-                    <label for="LastName" class="col-sm-2 control-label">LastName</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Last Name">
-                    </div>
+            </div>
+            <div class="form-group">
+                <label for="LastName" class="col-sm-2 control-label">LastName</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Last Name">
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">Register</button>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Register</button>
                 </div>
-            </form>        
+            </div>
+        </form>
     </div>
 </div>

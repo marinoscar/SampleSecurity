@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Luval.Security.Model.Views;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -52,7 +54,7 @@ namespace WebUi.Controllers
             {
                 return View(loginInfo);
             }
-            var result = StoreProvider.SignInPassword(loginInfo.UserName, loginInfo.Password, loginInfo.RememberMe, OwinContext);
+            var result = StoreProvider.SignInPassword(loginInfo.UserName, loginInfo.UserPassword, loginInfo.RememberMe, OwinContext);
             switch (result)
             {
                 case SignInStatus.Failure:
@@ -74,7 +76,7 @@ namespace WebUi.Controllers
 
         public ActionResult Logout()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie, DefaultAuthenticationTypes.ExternalCookie);
+            StoreProvider.SignOut(OwinContext);
             return RedirectToAction("Login");
         }
 
@@ -119,11 +121,10 @@ namespace WebUi.Controllers
                 return View(model);
             }
 
-            var password = new PasswordProvider().CreatePassword(model.Password);
+            var password = new PasswordProvider().CreatePassword(model.UserPassword);
             var user = new User()
                 {
                     UserName = model.UserName,
-                    LoweredUserName = model.UserName.ToLowerInvariant(),
                     PrimaryEmail = model.UserName,
                     Name = model.Name,
                     LastName = model.LastName,
@@ -141,9 +142,21 @@ namespace WebUi.Controllers
         [HttpGet]
         public ActionResult Manage()
         {
-            var userId = User.Identity.GetUserId();
-            var user = StoreProvider.FindUserById(userId, User.Identity.AuthenticationType == DefaultAuthenticationTypes.ExternalCookie);
+            var user = StoreProvider.FindUserById(User.Identity.GetApplicationUserId());
             return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Manage(User model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            model.SetUserId(User.Identity.GetApplicationUserId());
+            model.PrimaryEmail = model.UserName;
+            var task =StoreProvider.UpdateAsync(model);
+            task.Start();
+            task.Wait();
+            return RedirectToLocal(null);
         }
 
         #endregion
