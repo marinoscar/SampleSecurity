@@ -127,7 +127,6 @@ namespace WebUi.Controllers
                     UserName = model.UserName,
                     PrimaryEmail = model.UserName,
                     Name = model.Name,
-                    LastName = model.LastName,
                     PasswordHash = password.PasswordHash,
                     PasswordSalt = password.Salt
                 };

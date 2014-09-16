@@ -20,10 +20,17 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrapValidator.min.js"></script>
     <script src="~/Scripts/formValidators.js"></script>
+    <script src="~/Scripts/jstz.js"></script>
 
     <title>@ViewBag.Title</title>
     
     @RenderSection("mainScripts", false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @RenderSection("documentReady", false)
+        });
+    </script>
 
 </head>
 <body>
@@ -91,6 +98,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
+                <h1><span id="timeZoneData"></span></h1>
                 @RenderBody()
             </div>
             <div class="col-md-2"></div>
