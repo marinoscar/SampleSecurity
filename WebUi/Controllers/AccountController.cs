@@ -59,10 +59,10 @@ namespace WebUi.Controllers
             {
                 case SignInStatus.Failure:
                     ModelState.AddModelError("", "Invalid email or password");
-                    break;
+                    return View(loginInfo);
                 case SignInStatus.LockedOut:
                     ModelState.AddModelError("", "User is locked");
-                    break;
+                    return View(loginInfo);
             }
             return RedirectToLocal(returnUrl);
         }

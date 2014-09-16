@@ -23,11 +23,17 @@
     <script src="~/Scripts/jstz.js"></script>
 
     <title>@ViewBag.Title</title>
-    
+
     @RenderSection("mainScripts", false)
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.validation-summary-errors').each(function () {
+                $(this).data('role', 'alert');
+                $(this).addClass('alert');
+                $(this).addClass('alert-danger');
+                $(this).addClass('alert-dismissible');
+            });
             @RenderSection("documentReady", false)
         });
     </script>
