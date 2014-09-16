@@ -110,3 +110,6 @@ UpgradeLog*.XML
 # Build Folder
 Build/Debug
 Build/Release
+
+# Special file types
+*.keys
